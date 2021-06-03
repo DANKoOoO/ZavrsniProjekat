@@ -10,6 +10,7 @@ import rs.ac.bg.fon.ai.ZavrsniProjekat.Domen.Festival;
 import rs.ac.bg.fon.ai.ZavrsniProjekat.Domen.Grad;
 import rs.ac.bg.fon.ai.ZavrsniProjekat.Domen.Projekcija;
 import rs.ac.bg.fon.ai.ZavrsniProjekat.Domen.Film;
+import rs.ac.bg.fon.ai.ZavrsniProjekat.Domen.Glumac;
 
 public class BrokerBP {
 	
@@ -17,6 +18,7 @@ public class BrokerBP {
 	private ArrayList<Festival> sviFestivali;
 	private ArrayList<Projekcija> sveProjekcije;
 	private ArrayList<Film> sviFilmovi;
+	private ArrayList<Glumac> sviGlumci;
 	
 	private Connection con;
 	
@@ -26,6 +28,7 @@ public class BrokerBP {
 		sviFestivali = new ArrayList<Festival>();
 		sveProjekcije = new ArrayList<Projekcija>();
 		sviFilmovi = new ArrayList<Film>();
+		sviGlumci = new ArrayList<Glumac>();
 		
 		try 
 		{
@@ -43,8 +46,6 @@ public class BrokerBP {
 		}
 	}
 	
-
-
 
 	private ArrayList<Grad> vratiSveGradove(){	
 		try 
@@ -107,7 +108,7 @@ public class BrokerBP {
 		try 
 		{			
 			Statement statement = con.createStatement();			
-			ResultSet rs = statement.executeQuery("select * from projekcija");
+			ResultSet rs = statement.executeQuery("select * from film");
 			
 			while(rs.next()) 
 			{
@@ -117,7 +118,26 @@ public class BrokerBP {
 		}
 		catch(Exception e) 
 		{
-			System.out.println("Greska prilikom pozivanja sql naredbe za vracanje svih projekcija!\n"+ e);
+			System.out.println("Greska prilikom pozivanja sql naredbe za vracanje svih filmova!\n"+ e);
+			return null;
+		}
+	}
+
+	private ArrayList<Glumac> vratiSveGlumce(){	
+		try 
+		{			
+			Statement statement = con.createStatement();			
+			ResultSet rs = statement.executeQuery("select * from glumac");
+			
+			while(rs.next()) 
+			{
+				sviGlumci.add(new Glumac(rs.getInt(1), rs.getString(2), rs.getInt(3)));								
+			}						
+			return sviGlumci;
+		}
+		catch(Exception e) 
+		{
+			System.out.println("Greska prilikom pozivanja sql naredbe za vracanje svih glumaca!\n"+ e);
 			return null;
 		}
 	}
