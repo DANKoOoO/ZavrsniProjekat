@@ -1,11 +1,11 @@
 package rs.ac.bg.fon.ai.ZavrsniProjekat.Domen;
 
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 
 public class Projekcija {
 	private int projekcijaID;
 	private int festivalID;
-	private LocalDateTime datumVremeProjekcije;
+	private Timestamp datumVremeProjekcije;
 	private int filmID;
 	
 	public int getProjekcijaID() {
@@ -20,10 +20,10 @@ public class Projekcija {
 	public void setFestivalID(int festivalID) {
 		this.festivalID = festivalID;
 	}
-	public LocalDateTime getDatumVremeProjekcije() {
+	public Timestamp getDatumVremeProjekcije() {
 		return datumVremeProjekcije;
 	}
-	public void setDatumVremeProjekcije(LocalDateTime datumVremeProjekcije) {
+	public void setDatumVremeProjekcije(Timestamp datumVremeProjekcije) {
 		this.datumVremeProjekcije = datumVremeProjekcije;
 	}
 	public int getFilmID() {
@@ -32,11 +32,11 @@ public class Projekcija {
 	public void setFilmID(int filmID) {
 		this.filmID = filmID;
 	}
-	public Projekcija(int projekcijaID, int festivalID, LocalDateTime datumVremeProjekcije, int filmID) {
+	public Projekcija(int projekcijaID, int festivalID, Timestamp timestamp, int filmID) {
 		super();
 		this.projekcijaID = projekcijaID;
 		this.festivalID = festivalID;
-		this.datumVremeProjekcije = datumVremeProjekcije;
+		this.datumVremeProjekcije = timestamp;
 		this.filmID = filmID;
 	}
 	

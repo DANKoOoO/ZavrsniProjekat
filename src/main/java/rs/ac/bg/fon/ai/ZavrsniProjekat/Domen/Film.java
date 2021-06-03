@@ -6,7 +6,6 @@ public class Film {
 	private int filmID;
 	private String naziv;
 	private String reziser;
-	private ArrayList<String> glumci;
 	private int godina;
 	
 	public int getFilmID() {
@@ -26,13 +25,7 @@ public class Film {
 	}
 	public void setReziser(String reziser) {
 		this.reziser = reziser;
-	}
-	public ArrayList<String> getGlumci() {
-		return glumci;
-	}
-	public void setGlumci(ArrayList<String> glumci) {
-		this.glumci = glumci;
-	}
+	}	
 	public int getGodina() {
 		return godina;
 	}
@@ -40,19 +33,14 @@ public class Film {
 		this.godina = godina;
 	}
 	@Override
-	public String toString() {
-		String sviGlumci = "";
-		for (String glumac : glumci) {
-			sviGlumci+= glumac + " ";
-		}
-		return "Film: " + naziv + ", reziser:" + reziser + ", godina: " + godina + "\n" + "(" + sviGlumci + ")";
+	public String toString() {		
+		return "Film: " + naziv + ", reziser:" + reziser + ", godina: " + godina + "\n";
 	}
-	public Film(int filmID, String naziv, String reziser, ArrayList<String> glumci, int godina) {
+	public Film(int filmID, String naziv, String reziser, int godina) {
 		super();
 		this.filmID = filmID;
 		this.naziv = naziv;
 		this.reziser = reziser;
-		this.glumci = glumci;
 		this.godina = godina;
 	}
 	
