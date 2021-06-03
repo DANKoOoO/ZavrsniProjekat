@@ -31,7 +31,7 @@ public class GlavnaForma {
 	private JTextField txtDatumZavrsetka;
 	private JTextField txtPretraga;
 	
-	private Kontroler kontroler;
+	private Kontroler kontroler; // NAPRAVITI SINGLETON!!!
 	private JTable tblProjekcija;
 	private JTable tblFestival;
 
@@ -139,7 +139,8 @@ public class GlavnaForma {
 		JButton btnDodajProjekciju = new JButton("Dodaj projekciju");
 		btnDodajProjekciju.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {				
-				modelProjekcija.addRow(new Object[]{});									
+				DodavanjeProjekcije dodavanjeProjekcije = new DodavanjeProjekcije();								
+				dodavanjeProjekcije.setVisible(true);
 			}
 		});
 		btnDodajProjekciju.setBounds(24, 424, 146, 44);
