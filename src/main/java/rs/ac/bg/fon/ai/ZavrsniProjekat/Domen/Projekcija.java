@@ -32,6 +32,13 @@ public class Projekcija {
 	public void setFilmID(int filmID) {
 		this.filmID = filmID;
 	}
+	public Projekcija(int projekcijaID, int festivalID, LocalDateTime datumVremeProjekcije, int filmID) {
+		super();
+		this.projekcijaID = projekcijaID;
+		this.festivalID = festivalID;
+		this.datumVremeProjekcije = datumVremeProjekcije;
+		this.filmID = filmID;
+	}
 	
 	
 }

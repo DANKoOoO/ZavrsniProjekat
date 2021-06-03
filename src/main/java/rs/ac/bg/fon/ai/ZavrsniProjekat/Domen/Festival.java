@@ -41,4 +41,18 @@ public class Festival {
 	}
 	
 	
+	@Override
+	public String toString() {
+		return "Festival: " + naziv + "[datum pocetka: " + datumOd + ", datum zavrsetka: " + datumDo + "], gradID=" + gradID;
+	}
+	public Festival(int festivalID, String naziv, LocalDate datumOd, LocalDate datumDo, int gradID) {
+		super();
+		this.festivalID = festivalID;
+		this.naziv = naziv;
+		this.datumOd = datumOd;
+		this.datumDo = datumDo;
+		this.gradID = gradID;
+	}
+	
+	
 }
