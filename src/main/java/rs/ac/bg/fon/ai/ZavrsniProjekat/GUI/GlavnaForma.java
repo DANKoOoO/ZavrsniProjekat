@@ -31,7 +31,6 @@ public class GlavnaForma {
 	private JTextField txtDatumZavrsetka;
 	private JTextField txtPretraga;
 	
-	private Kontroler kontroler; // NAPRAVITI SINGLETON!!!
 	private JTable tblProjekcija;
 	private JTable tblFestival;
 
@@ -55,7 +54,6 @@ public class GlavnaForma {
 	 * Create the application.
 	 */
 	public GlavnaForma() {
-		kontroler = new Kontroler();
 		initialize();
 	}
 
@@ -149,7 +147,8 @@ public class GlavnaForma {
 		JButton btnSacuvajFestival = new JButton("Sacuvaj festival");
 		btnSacuvajFestival.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				kontroler.SacuvajFestival(txtNaziFestivala.getText(), txtDatumPocetka.getText(), txtDatumZavrsetka.getText(), (Grad) cbGrad.getSelectedItem());				
+				
+				Kontroler.Instanca().SacuvajFestival(txtNaziFestivala.getText(), txtDatumPocetka.getText(), txtDatumZavrsetka.getText(), (Grad) cbGrad.getSelectedItem());				
 			}
 		});
 		btnSacuvajFestival.setBounds(306, 424, 146, 44);
@@ -158,7 +157,7 @@ public class GlavnaForma {
 		JButton btnPretrazi = new JButton("Pretrazi");
 		btnPretrazi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				kontroler.PretraziFestivale(txtPretraga.getText());			
+				Kontroler.Instanca().PretraziFestivale(txtPretraga.getText());			
 			}
 		});
 		btnPretrazi.setBounds(745, 40, 146, 44);

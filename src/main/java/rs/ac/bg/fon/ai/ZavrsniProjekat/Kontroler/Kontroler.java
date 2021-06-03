@@ -7,9 +7,22 @@ import rs.ac.bg.fon.ai.ZavrsniProjekat.Domen.Film;
 import rs.ac.bg.fon.ai.ZavrsniProjekat.Domen.Grad;
 
 public class Kontroler {
+	
+	private static Kontroler kontroler = null;
+	
+	private Kontroler() {}
+	
+	public static Kontroler Instanca()  
+	{
+		if(kontroler == null)
+			kontroler = new Kontroler();
+		
+		return kontroler;
+	}
+	
 	public void SacuvajFestival(String nazivFestivala, String datumPocetka, String datumZavrsetka, Grad grad) 
 	{
-		
+
 	}
 	public void PretraziFestivale(String deoImena) 
 	{
@@ -26,5 +39,16 @@ public class Kontroler {
 		
 	
 		return sviFilmovi;
+	}
+	
+	public boolean ispravnoUnetiSviTextBoxovi(String...strings) 
+	{
+		for (String s : strings) {
+			if(s.isEmpty()) 
+			{
+				return false;
+			}
+		}
+		return true;
 	}
 }

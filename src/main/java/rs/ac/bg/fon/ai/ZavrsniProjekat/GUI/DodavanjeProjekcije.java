@@ -24,11 +24,7 @@ public class DodavanjeProjekcije extends JFrame {
 	private JTextField txtFilm;
 	private JTable tblFilmovi;
 	private JTextField txtDatumVreme;
-
-	private Kontroler kontroler; //NAPRAVITI SINGLETON!!!
 	
-
-
 	/**
 	 * Launch the application.
 	 */
@@ -49,7 +45,6 @@ public class DodavanjeProjekcije extends JFrame {
 	 * Create the frame.
 	 */
 	public DodavanjeProjekcije() {
-		kontroler = new Kontroler();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 676, 511);
@@ -63,7 +58,7 @@ public class DodavanjeProjekcije extends JFrame {
 		modelFilm.addColumn("Reziser");
 		modelFilm.addColumn("Godina");
 
-		for (Film f : kontroler.VratiSveFilmove()) {
+		for (Film f : Kontroler.Instanca().VratiSveFilmove()) {
 			Object[] data = {f.getNaziv(), f.getReziser(), f.getGodina()};
 			modelFilm.addRow(data);
 		}
