@@ -36,6 +36,10 @@ public class BrokerBP {
 			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Festivali","root","");		
 			
 			vratiSveGradove();
+			vratiSveFestivale();
+			vratiSveProjekcije();
+			vratiSveFilmove();
+			vratiSveGlumce();
 			
 			con.close();			
 		}
@@ -46,7 +50,46 @@ public class BrokerBP {
 		}
 	}
 	
+		
+	private void dodajFestival(Festival festival) 
+	{
+		try 
+		{
+			Class.forName("com.mysql.cj.jdbc.Driver");			
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Festivali","root","");		
+			Statement statement = con.createStatement();			
+			statement.executeUpdate("INSERT INTO festival (FestivalID, Naziv, DatumOd, DatumDo, GradID) VALUES ("+
+					festival.getFestivalID()+", "+ festival.getNaziv() +", "+ festival.getDatumOd()+", "+ festival.getDatumDo()+", "+ festival.getGradID() +")");
+			
+			con.close();			
+		} catch(Exception e) 
+		{
+			System.out.println("Greska prilikom konekcije sa bazom! [Unosenje festivala]\n"+ e);
 
+		}
+	}
+	
+	private void dodajProjekcije(ArrayList<Projekcija> proojekcije) 
+	{
+		try 
+		{
+			Class.forName("com.mysql.cj.jdbc.Driver");			
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Festivali","root","");		
+			Statement statement = con.createStatement();		
+			
+			for (Projekcija projekcija : proojekcije) {
+				statement.executeUpdate("INSERT INTO projekcija (projekcijaID, festivalID, datumVremeProjekcije, filmID) VALUES ("+
+			projekcija.getProjekcijaID()+","+ projekcija.getFestivalID()+ ", "+ projekcija.getDatumVremeProjekcije()+ ", "+ projekcija.getFilmID() +")");
+			}
+			
+			con.close();			
+		} catch(Exception e) 
+		{
+			System.out.println("Greska prilikom konekcije sa bazom! [Unosenje festivala]\n"+ e);
+
+		}
+	}
+	
 	private ArrayList<Grad> vratiSveGradove(){	
 		try 
 		{			
