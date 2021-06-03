@@ -2,6 +2,7 @@ package rs.ac.bg.fon.ai.ZavrsniProjekat.Broker;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -51,16 +52,19 @@ public class BrokerBP {
 	}
 	
 		
-	private void dodajFestival(Festival festival) 
+	public void dodajFestival(Festival festival) 
 	{
 		try 
 		{
 			Class.forName("com.mysql.cj.jdbc.Driver");			
 			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Festivali","root","");		
 			Statement statement = con.createStatement();			
-			statement.executeUpdate("INSERT INTO festival (FestivalID, Naziv, DatumOd, DatumDo, GradID) VALUES ("+
-					festival.getFestivalID()+", "+ festival.getNaziv() +", "+ festival.getDatumOd()+", "+ festival.getDatumDo()+", "+ festival.getGradID() +")");
-			
+			PreparedStatement ps = con.prepareStatement("INSERT INTO festival (FestivalID, Naziv, DatumOd, DatumDo, GradID) VALUES ("+
+					null+", '"+ festival.getNaziv() +"', ?, ?, "+ festival.getGradID() +")");
+			ps.setDate(1, festival.getDatumOd());
+			ps.setDate(2, festival.getDatumDo());
+			ps.executeUpdate();
+			ps.close();
 			con.close();			
 		} catch(Exception e) 
 		{
@@ -69,7 +73,7 @@ public class BrokerBP {
 		}
 	}
 	
-	private void dodajProjekcije(ArrayList<Projekcija> proojekcije) 
+	public void dodajProjekcije(ArrayList<Projekcija> proojekcije) 
 	{
 		try 
 		{
@@ -79,13 +83,13 @@ public class BrokerBP {
 			
 			for (Projekcija projekcija : proojekcije) {
 				statement.executeUpdate("INSERT INTO projekcija (projekcijaID, festivalID, datumVremeProjekcije, filmID) VALUES ("+
-			projekcija.getProjekcijaID()+","+ projekcija.getFestivalID()+ ", "+ projekcija.getDatumVremeProjekcije()+ ", "+ projekcija.getFilmID() +")");
+			null+","+ projekcija.getFestivalID()+ ", "+ projekcija.getDatumVremeProjekcije()+ ", "+ projekcija.getFilmID() +")");
 			}
 			
 			con.close();			
 		} catch(Exception e) 
 		{
-			System.out.println("Greska prilikom konekcije sa bazom! [Unosenje festivala]\n"+ e);
+			System.out.println("Greska prilikom konekcije sa bazom! [Unosenje projekcija]\n"+ e);
 
 		}
 	}
@@ -184,4 +188,56 @@ public class BrokerBP {
 			return null;
 		}
 	}
+
+
+	public ArrayList<Grad> getSviGradovi() {
+		return sviGradovi;
+	}
+
+
+	public void setSviGradovi(ArrayList<Grad> sviGradovi) {
+		this.sviGradovi = sviGradovi;
+	}
+
+
+	public ArrayList<Festival> getSviFestivali() {
+		return sviFestivali;
+	}
+
+
+	public void setSviFestivali(ArrayList<Festival> sviFestivali) {
+		this.sviFestivali = sviFestivali;
+	}
+
+
+	public ArrayList<Projekcija> getSveProjekcije() {
+		return sveProjekcije;
+	}
+
+
+	public void setSveProjekcije(ArrayList<Projekcija> sveProjekcije) {
+		this.sveProjekcije = sveProjekcije;
+	}
+
+
+	public ArrayList<Film> getSviFilmovi() {
+		return sviFilmovi;
+	}
+
+
+	public void setSviFilmovi(ArrayList<Film> sviFilmovi) {
+		this.sviFilmovi = sviFilmovi;
+	}
+
+
+	public ArrayList<Glumac> getSviGlumci() {
+		return sviGlumci;
+	}
+
+
+	public void setSviGlumci(ArrayList<Glumac> sviGlumci) {
+		this.sviGlumci = sviGlumci;
+	}
+	
+	
 }

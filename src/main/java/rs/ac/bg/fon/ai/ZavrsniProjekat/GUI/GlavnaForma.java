@@ -7,6 +7,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import java.awt.BorderLayout;
+
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
@@ -81,7 +83,7 @@ public class GlavnaForma {
 		frame.getContentPane().add(txtDatumZavrsetka);
 		txtDatumZavrsetka.setColumns(10);
 		
-		final JComboBox cbGrad = new JComboBox();
+		final JComboBox<Grad> cbGrad = new JComboBox<Grad>();
 		cbGrad.setBounds(114, 143, 338, 22);
 		frame.getContentPane().add(cbGrad);
 		
@@ -163,6 +165,7 @@ public class GlavnaForma {
 		btnPretrazi.setBounds(745, 40, 146, 44);
 		frame.getContentPane().add(btnPretrazi);
 		
+		cbGrad.setModel(new DefaultComboBoxModel<Grad>(Kontroler.Instanca().VratiSveGradove().toArray((new Grad[0]))));
 		
 	}
 }
