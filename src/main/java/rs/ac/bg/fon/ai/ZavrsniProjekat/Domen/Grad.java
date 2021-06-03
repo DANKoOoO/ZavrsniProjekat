@@ -23,6 +23,17 @@ public class Grad {
 	public void setDrzava(String drzava) {
 		this.drzava = drzava;
 	}
+	@Override
+	public String toString() {
+		return "Grad: " + naziv + " (" + drzava + ")";
+	}
+	
+	public Grad(int gradID, String naziv, String drzava) {
+		super();
+		this.gradID = gradID;
+		this.naziv = naziv;
+		this.drzava = drzava;
+	}
 	
 	
 }

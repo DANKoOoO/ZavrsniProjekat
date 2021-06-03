@@ -39,6 +39,22 @@ public class Film {
 	public void setGodina(int godina) {
 		this.godina = godina;
 	}
+	@Override
+	public String toString() {
+		String sviGlumci = "";
+		for (String glumac : glumci) {
+			sviGlumci+= glumac + " ";
+		}
+		return "Film: " + naziv + ", reziser:" + reziser + ", godina: " + godina + "\n" + "(" + sviGlumci + ")";
+	}
+	public Film(int filmID, String naziv, String reziser, ArrayList<String> glumci, int godina) {
+		super();
+		this.filmID = filmID;
+		this.naziv = naziv;
+		this.reziser = reziser;
+		this.glumci = glumci;
+		this.godina = godina;
+	}
 	
 	
 }
