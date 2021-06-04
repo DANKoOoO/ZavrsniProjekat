@@ -82,4 +82,36 @@ public class Kontroler {
 		}
 		return true;
 	}
+
+	
+	public boolean proveriFormatVremena(String...strings) {
+		for (String s : strings) {
+			String[] podeli = s.split(":");
+			if(podeli.length != 3) return false;
+			if(podeli[0].length() != 2 || podeli[1].length() != 2 || podeli[2].length() != 2) return false;
+			try {
+				if(Integer.parseInt(podeli[0]) > 24 || Integer.parseInt(podeli[1]) < 0) return false;
+				if(Integer.parseInt(podeli[1]) > 59 || Integer.parseInt(podeli[1]) < 0) return false;
+				if(Integer.parseInt(podeli[2]) > 59 || Integer.parseInt(podeli[2]) < 0) return false;
+			}
+			catch (Exception e) {
+				return false;
+			}
+
+		}
+		return true;
+		
+	}
+	
+	public boolean proveriFormatDatumaIVremena(String datumVreme) {
+		String[] dv = datumVreme.split(" ");
+
+		if(!proveriFormatDatuma(dv[0])) {
+			return false;
+		}
+		if(!proveriFormatVremena(dv[1])) {
+			return false;
+		}
+		return true;
+	}
 }

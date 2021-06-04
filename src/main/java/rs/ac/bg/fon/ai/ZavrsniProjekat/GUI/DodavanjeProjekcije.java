@@ -7,6 +7,8 @@ import java.awt.HeadlessException;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 
 import rs.ac.bg.fon.ai.ZavrsniProjekat.Domen.Film;
@@ -16,7 +18,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JTable;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.awt.event.ActionEvent;
+import javax.swing.ListSelectionModel;
 
 public class DodavanjeProjekcije extends JFrame {
 
@@ -24,6 +31,8 @@ public class DodavanjeProjekcije extends JFrame {
 	private JTextField txtFilm;
 	private JTable tblFilmovi;
 	private JTextField txtDatumVreme;
+	
+	private ArrayList<Film> sviFilmovi = Kontroler.Instanca().VratiSveFilmove();
 	
 	/**
 	 * Launch the application.
@@ -53,23 +62,28 @@ public class DodavanjeProjekcije extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		DefaultTableModel modelFilm = new DefaultTableModel();
+		final DefaultTableModel modelFilm = new DefaultTableModel();
 		modelFilm.addColumn("Naziv");
 		modelFilm.addColumn("Reziser");
 		modelFilm.addColumn("Godina");
+		modelFilm.addColumn("FilmID");
 
-		for (Film f : Kontroler.Instanca().VratiSveFilmove()) {
-			Object[] data = {f.getNaziv(), f.getReziser(), f.getGodina()};
+		
+		for (Film f : sviFilmovi) {
+			Object[] data = {f.getNaziv(), f.getReziser(), f.getGodina(), f.getFilmID()};
 			modelFilm.addRow(data);
 		}
 		
 		tblFilmovi = new JTable(modelFilm);
+		tblFilmovi.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tblFilmovi.setBounds(0, 0, 1, 1);
 		contentPane.add(tblFilmovi);
 		
 		JScrollPane scrollPaneFilmovi = new JScrollPane(tblFilmovi);
 		scrollPaneFilmovi.setBounds(20, 79, 346, 370);
 		contentPane.add(scrollPaneFilmovi);
+		
+		tblFilmovi.removeColumn(tblFilmovi.getColumnModel().getColumn(3));
 		
 		txtFilm = new JTextField();
 		txtFilm.setBounds(20, 37, 346, 20);
@@ -86,6 +100,21 @@ public class DodavanjeProjekcije extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		JButton btnDodaj = new JButton("DodajProjekciju");
+		btnDodaj.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(tblFilmovi.getSelectionModel().isSelectionEmpty()) {
+					JFrame f=new JFrame();  
+					JOptionPane.showMessageDialog(f,"Nije odabran ni jedan film!");  
+				}else if(!Kontroler.Instanca().ispravnoUnetiSviTextBoxovi(txtDatumVreme.getText()) || !Kontroler.Instanca().proveriFormatDatumaIVremena(txtDatumVreme.getText())) 
+				{
+					JFrame f=new JFrame();  
+					JOptionPane.showMessageDialog(f,"Nije unet datum ili je los format!");  
+				}
+				else {
+					System.out.println(modelFilm.getDataVector().elementAt(tblFilmovi.getSelectedRow()));
+				}
+			}
+		});
 		btnDodaj.setBounds(440, 255, 185, 45);
 		contentPane.add(btnDodaj);
 		
@@ -93,7 +122,26 @@ public class DodavanjeProjekcije extends JFrame {
 		lblNewLabel_1.setBounds(20, 11, 238, 14);
 		contentPane.add(lblNewLabel_1);
 		
+		txtFilm.getDocument().addDocumentListener(new DocumentListener() {
+			public void removeUpdate(DocumentEvent e) {
+				SortirajTabelu(txtFilm.getText(), modelFilm);
+			}
+			public void insertUpdate(DocumentEvent e) {
+				SortirajTabelu(txtFilm.getText(), modelFilm);
+			}
+			public void changedUpdate(DocumentEvent e) {
+				SortirajTabelu(txtFilm.getText(), modelFilm);
+			}
+		});
 		
-		
+	}
+	public void SortirajTabelu(String deoFilma, DefaultTableModel modelFilm) {
+		modelFilm.setRowCount(0);
+		for (Film f : sviFilmovi) {
+			if(f.getNaziv().toLowerCase().contains(deoFilma.toLowerCase())) {
+				Object[] data = {f.getNaziv(), f.getReziser(), f.getGodina(), f.getFilmID()};
+				modelFilm.addRow(data);
+			}
+		}
 	}
 }
