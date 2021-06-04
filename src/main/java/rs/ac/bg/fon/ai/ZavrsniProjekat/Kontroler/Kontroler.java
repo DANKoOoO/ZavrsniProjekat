@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Vector;
 
+import javax.swing.table.DefaultTableModel;
+
 import rs.ac.bg.fon.ai.ZavrsniProjekat.Broker.BrokerBP;
 import rs.ac.bg.fon.ai.ZavrsniProjekat.Domen.Festival;
 import rs.ac.bg.fon.ai.ZavrsniProjekat.Domen.Film;
@@ -16,7 +18,8 @@ public class Kontroler {
 	private BrokerBP broker;
 	private static Kontroler kontroler = null;
 	private ArrayList<Projekcija> projekcijeZaUnos = new ArrayList<Projekcija>();
-
+	private RefreshThread rt;
+	
 	private Kontroler() {
 		broker = new BrokerBP();
 	}
@@ -46,7 +49,7 @@ public class Kontroler {
 
 	}
 	
-	public void PretraziFestivale(String deoImena) 
+	public void pretraziFestivale(String deoImena) 
 	{
 		
 		
@@ -123,5 +126,15 @@ public class Kontroler {
 
 	public void dodajProjekciju(Projekcija p) {
 		projekcijeZaUnos.add(p);
+	}
+
+	public void VratiOdredjeneFestivale(String deoNaziva, DefaultTableModel modelFestival) {
+		rt = new RefreshThread(broker, modelFestival);
+		rt.start();
+	}
+
+	public void promeniDeoNaziva(String deoNaziva) {		
+		rt.deoNaziva = deoNaziva;
+		rt.obavesti();
 	}
 }

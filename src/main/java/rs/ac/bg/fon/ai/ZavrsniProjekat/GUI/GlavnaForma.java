@@ -11,8 +11,12 @@ import java.awt.BorderLayout;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 
+import rs.ac.bg.fon.ai.ZavrsniProjekat.Domen.Festival;
+import rs.ac.bg.fon.ai.ZavrsniProjekat.Domen.Film;
 import rs.ac.bg.fon.ai.ZavrsniProjekat.Domen.Grad;
 import rs.ac.bg.fon.ai.ZavrsniProjekat.Kontroler.Kontroler;
 
@@ -22,11 +26,12 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.ScrollPane;
 
 public class GlavnaForma {
-
+	
 	private JFrame frame;
 	private JTextField txtNaziv;
 	private JTextField textField;
@@ -37,6 +42,7 @@ public class GlavnaForma {
 	
 	private JTable tblProjekcija;
 	private JTable tblFestival;
+	private DefaultTableModel modelFestival;
 
 	/**
 	 * Launch the application.
@@ -59,6 +65,7 @@ public class GlavnaForma {
 	 */
 	public GlavnaForma() {
 		initialize();
+		Kontroler.Instanca().VratiOdredjeneFestivale(txtPretraga.getText(), modelFestival);
 	}
 
 	/**
@@ -114,7 +121,7 @@ public class GlavnaForma {
 		modelProjekcija.addColumn("Film");
 		modelProjekcija.addColumn("Datum i vreme projekcije");
 
-		final DefaultTableModel modelFestival = new DefaultTableModel();
+		modelFestival = new DefaultTableModel();
 		modelFestival.addColumn("Naziv");
 		modelFestival.addColumn("Grad");
 		modelFestival.addColumn("Datum od");
@@ -190,6 +197,18 @@ public class GlavnaForma {
 		JLabel lblNewLabel_6 = new JLabel("Pretraga festivala");
 		lblNewLabel_6.setBounds(504, 14, 187, 14);
 		frame.getContentPane().add(lblNewLabel_6);
+		
+		txtPretraga.getDocument().addDocumentListener(new DocumentListener() {
+			public void removeUpdate(DocumentEvent e) {
+				Kontroler.Instanca().promeniDeoNaziva(txtPretraga.getText());
+			}
+			public void insertUpdate(DocumentEvent e) {
+				Kontroler.Instanca().promeniDeoNaziva(txtPretraga.getText());
+			}
+			public void changedUpdate(DocumentEvent e) {
+				Kontroler.Instanca().promeniDeoNaziva(txtPretraga.getText());
+			}
+		});
 		
 	}
 }

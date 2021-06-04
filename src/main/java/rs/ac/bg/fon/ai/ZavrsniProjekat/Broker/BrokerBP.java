@@ -145,6 +145,30 @@ public class BrokerBP {
 		}
 	}
 
+	public ArrayList<Festival> vratiOdredjeneFestivale(String deoNaziva){	
+		ArrayList<Festival> odredjeniFestivali = new ArrayList<Festival>();
+		try 
+		{			
+			Class.forName("com.mysql.cj.jdbc.Driver");			
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Festivali","root","");			
+			Statement statement = con.createStatement();			
+			ResultSet rs = statement.executeQuery("select * from festival where naziv like '%"+ deoNaziva +"%'");
+			
+			while(rs.next()) 
+			{
+				odredjeniFestivali.add(new Festival(rs.getInt(1), rs.getString(2), rs.getDate(3), rs.getDate(4), rs.getInt(5)));								
+			}		
+			con.close();
+			return odredjeniFestivali;
+		}
+		catch(Exception e) 
+		{
+			System.out.println("Greska prilikom pozivanja sql naredbe za vracanje svih festivala!\n"+ e);
+			return null;
+		}
+	}
+
+	
 	private ArrayList<Projekcija> vratiSveProjekcije(){
 		try 
 		{			
