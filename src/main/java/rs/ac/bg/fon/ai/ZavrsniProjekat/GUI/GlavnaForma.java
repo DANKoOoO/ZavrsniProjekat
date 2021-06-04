@@ -106,7 +106,7 @@ public class GlavnaForma {
 		frame.getContentPane().add(lblNewLabel_3);
 		
 		txtPretraga = new JTextField();
-		txtPretraga.setBounds(494, 46, 241, 32);
+		txtPretraga.setBounds(504, 46, 387, 32);
 		frame.getContentPane().add(txtPretraga);
 		txtPretraga.setColumns(10);	
 				
@@ -177,15 +177,6 @@ public class GlavnaForma {
 		btnSacuvajFestival.setBounds(306, 424, 146, 44);
 		frame.getContentPane().add(btnSacuvajFestival);
 		
-		JButton btnPretrazi = new JButton("Pretrazi");
-		btnPretrazi.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Kontroler.Instanca().PretraziFestivale(txtPretraga.getText());			
-			}
-		});
-		btnPretrazi.setBounds(745, 40, 146, 44);
-		frame.getContentPane().add(btnPretrazi);
-		
 		cbGrad.setModel(new DefaultComboBoxModel<Grad>(Kontroler.Instanca().VratiSveGradove().toArray((new Grad[0]))));
 		
 		JLabel lblNewLabel_4 = new JLabel("(yyyy-MM-dd)");
@@ -195,6 +186,10 @@ public class GlavnaForma {
 		JLabel lblNewLabel_5 = new JLabel("(yyyy-MM-dd)");
 		lblNewLabel_5.setBounds(24, 112, 80, 14);
 		frame.getContentPane().add(lblNewLabel_5);
+		
+		JLabel lblNewLabel_6 = new JLabel("Pretraga festivala");
+		lblNewLabel_6.setBounds(504, 14, 187, 14);
+		frame.getContentPane().add(lblNewLabel_6);
 		
 	}
 }
