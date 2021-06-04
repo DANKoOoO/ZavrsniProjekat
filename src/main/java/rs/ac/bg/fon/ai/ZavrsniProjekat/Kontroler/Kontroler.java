@@ -39,11 +39,13 @@ public class Kontroler {
 		}
 		//broker.dodajProjekcije(null); //treba uneti preko tabele listu projekcija.
 	}
+	
 	public void PretraziFestivale(String deoImena) 
 	{
 		
 		
 	}
+	
 	public ArrayList<Film> VratiSveFilmove() {
 		return broker.getSviFilmovi();
 	}
@@ -61,5 +63,23 @@ public class Kontroler {
 
 	public ArrayList<Grad> VratiSveGradove() {
 		return broker.getSviGradovi();
+	}
+
+	public boolean proveriFormatDatuma(String...strings) {
+		for (String s : strings) {
+			String[] podeli = s.split("-");
+			if(podeli.length != 3) return false;
+			if(podeli[0].length() != 4 || podeli[1].length() != 2 || podeli[2].length() != 2) return false;
+			try {
+				Integer.parseInt(podeli[0]);
+				if(Integer.parseInt(podeli[1]) > 12 || Integer.parseInt(podeli[1]) < 1) return false;
+				if(Integer.parseInt(podeli[2]) > 31 || Integer.parseInt(podeli[2]) < 1) return false;
+			}
+			catch (Exception e) {
+				return false;
+			}
+
+		}
+		return true;
 	}
 }

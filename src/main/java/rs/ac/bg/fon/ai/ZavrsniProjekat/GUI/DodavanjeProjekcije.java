@@ -81,7 +81,7 @@ public class DodavanjeProjekcije extends JFrame {
 		contentPane.add(txtDatumVreme);
 		txtDatumVreme.setColumns(10);
 		
-		JLabel lblNewLabel = new JLabel("Datum i vreme u formatu yyyy-MM-dd HH:mm:ss");
+		JLabel lblNewLabel = new JLabel("Datum i vreme (yyyy-MM-dd HH:mm:ss)");
 		lblNewLabel.setBounds(397, 92, 253, 14);
 		contentPane.add(lblNewLabel);
 		

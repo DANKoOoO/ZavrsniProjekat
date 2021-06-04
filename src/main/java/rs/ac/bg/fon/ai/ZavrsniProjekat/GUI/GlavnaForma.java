@@ -19,6 +19,8 @@ import rs.ac.bg.fon.ai.ZavrsniProjekat.Kontroler.Kontroler;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.ScrollPane;
@@ -149,8 +151,13 @@ public class GlavnaForma {
 		JButton btnSacuvajFestival = new JButton("Sacuvaj festival");
 		btnSacuvajFestival.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				Kontroler.Instanca().SacuvajFestival(txtNaziFestivala.getText(), txtDatumPocetka.getText(), txtDatumZavrsetka.getText(), (Grad) cbGrad.getSelectedItem());				
+				if(Kontroler.Instanca().ispravnoUnetiSviTextBoxovi(txtNaziFestivala.getText(), txtDatumPocetka.getText(), txtDatumZavrsetka.getText()) && Kontroler.Instanca().proveriFormatDatuma(txtDatumPocetka.getText(), txtDatumZavrsetka.getText())) {
+					Kontroler.Instanca().SacuvajFestival(txtNaziFestivala.getText(), txtDatumPocetka.getText(), txtDatumZavrsetka.getText(), (Grad) cbGrad.getSelectedItem());	
+				}
+				else {
+					JFrame f=new JFrame();  
+					JOptionPane.showMessageDialog(f,"Nisu uneta sva polja ili je pogresan format!");  
+				}
 			}
 		});
 		btnSacuvajFestival.setBounds(306, 424, 146, 44);
@@ -166,6 +173,14 @@ public class GlavnaForma {
 		frame.getContentPane().add(btnPretrazi);
 		
 		cbGrad.setModel(new DefaultComboBoxModel<Grad>(Kontroler.Instanca().VratiSveGradove().toArray((new Grad[0]))));
+		
+		JLabel lblNewLabel_4 = new JLabel("(yyyy-MM-dd)");
+		lblNewLabel_4.setBounds(24, 69, 80, 14);
+		frame.getContentPane().add(lblNewLabel_4);
+		
+		JLabel lblNewLabel_5 = new JLabel("(yyyy-MM-dd)");
+		lblNewLabel_5.setBounds(24, 112, 80, 14);
+		frame.getContentPane().add(lblNewLabel_5);
 		
 	}
 }
