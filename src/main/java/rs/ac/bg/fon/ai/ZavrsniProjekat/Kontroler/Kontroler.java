@@ -34,9 +34,9 @@ public class Kontroler {
 		try {
 			java.sql.Date datumTEST = new java.sql.Date(new SimpleDateFormat("yyyy-MM-dd").parse(datumZavrsetka).getTime());
 			Festival f = new Festival(0, nazivFestivala, new java.sql.Date(new SimpleDateFormat("yyyy-MM-dd").parse(datumPocetka).getTime()), new java.sql.Date(new SimpleDateFormat("yyyy-MM-dd").parse(datumZavrsetka).getTime()), grad.getGradID());
-			broker.dodajFestival(f);
+			int festivalID = broker.dodajFestival(f);
 			
-			broker.dodajProjekcije(projekcijeZaUnos); 
+			broker.dodajProjekcije(projekcijeZaUnos, festivalID); 
 
 			projekcijeZaUnos.clear();
 			

@@ -30,6 +30,7 @@ import javax.swing.ListSelectionModel;
 
 public class DodavanjeProjekcije extends JFrame {
 
+	private static JFrame glavna;
 	private JPanel contentPane;
 	private JTextField txtFilm;
 	private JTable tblFilmovi;
@@ -44,7 +45,7 @@ public class DodavanjeProjekcije extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					DodavanjeProjekcije frame = new DodavanjeProjekcije(null);
+					DodavanjeProjekcije frame = new DodavanjeProjekcije(null, glavna);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -56,9 +57,11 @@ public class DodavanjeProjekcije extends JFrame {
 	/**
 	 * Create the frame.
 	 * @param modelProjekcija 
+	 * @param frame 
 	 * @param tblProjekcija 
 	 */
-	public DodavanjeProjekcije(final DefaultTableModel modelProjekcija) {
+	public DodavanjeProjekcije(final DefaultTableModel modelProjekcija, JFrame frame) {
+		glavna = frame;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 676, 511);
@@ -125,7 +128,10 @@ public class DodavanjeProjekcije extends JFrame {
 							Timestamp timestamp = Timestamp.valueOf(txtDatumVreme.getText());
 							Projekcija p = new Projekcija(0, 0, timestamp, film.getFilmID());
 							Kontroler.Instanca().dodajProjekciju(p); 
-							System.out.println(film);
+
+							txtDatumVreme.setText("");
+							DodavanjeProjekcije.super.setVisible(false);
+							glavna.setVisible(true);
 						}
 					}
 				}

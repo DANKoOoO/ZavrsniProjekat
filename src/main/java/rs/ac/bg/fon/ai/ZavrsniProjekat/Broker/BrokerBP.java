@@ -52,28 +52,36 @@ public class BrokerBP {
 	}
 	
 		
-	public void dodajFestival(Festival festival) 
-	{
+	public int dodajFestival(Festival festival) 
+	{			
+		int id = 0;
 		try 
 		{
+
 			Class.forName("com.mysql.cj.jdbc.Driver");			
 			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Festivali","root","");		
 			Statement statement = con.createStatement();			
 			PreparedStatement ps = con.prepareStatement("INSERT INTO festival (FestivalID, Naziv, DatumOd, DatumDo, GradID) VALUES ("+
-					null+", '"+ festival.getNaziv() +"', ?, ?, "+ festival.getGradID() +")");
+					null+", '"+ festival.getNaziv() +"', ?, ?, "+ festival.getGradID() +")",Statement.RETURN_GENERATED_KEYS);
 			ps.setDate(1, festival.getDatumOd());
 			ps.setDate(2, festival.getDatumDo());
 			ps.executeUpdate();
+
+			ResultSet ids = ps.getGeneratedKeys();
+			if(ids.next()) {
+				id = ids.getInt(1);
+			}
 			ps.close();
-			con.close();			
+			con.close();	
+
 		} catch(Exception e) 
 		{
 			System.out.println("Greska prilikom konekcije sa bazom! [Unosenje festivala]\n"+ e);
-
 		}
+		return id;
 	}
 	
-	public void dodajProjekcije(ArrayList<Projekcija> projekcije) 
+	public void dodajProjekcije(ArrayList<Projekcija> projekcije, int festivalID) 
 	{
 		try 
 		{
@@ -81,11 +89,16 @@ public class BrokerBP {
 			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Festivali","root","");		
 			Statement statement = con.createStatement();		
 			
-			for (Projekcija projekcija : projekcije) {
-				statement.executeUpdate("INSERT INTO projekcija (projekcijaID, festivalID, datumVremeProjekcije, filmID) VALUES ("+
-			null+","+ projekcija.getFestivalID()+ ", "+ projekcija.getDatumVremeProjekcije()+ ", "+ projekcija.getFilmID() +")");
-			}
 			
+			
+			for (Projekcija projekcija : projekcije) {
+				PreparedStatement ps = con.prepareStatement("INSERT INTO projekcija (projekcijaID, festivalID, datumVremeProjekcije, filmID) VALUES ("+
+			null+","+ festivalID+ ", ? , "+ projekcija.getFilmID() +")");
+				ps.setTimestamp(1, projekcija.getDatumVremeProjekcije());
+				ps.executeUpdate();
+				ps.close();
+			}
+
 			con.close();			
 		} catch(Exception e) 
 		{

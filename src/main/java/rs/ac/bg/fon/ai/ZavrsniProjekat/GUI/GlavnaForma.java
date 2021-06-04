@@ -141,8 +141,9 @@ public class GlavnaForma {
 		JButton btnDodajProjekciju = new JButton("Dodaj projekciju");
 		btnDodajProjekciju.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {				
-				DodavanjeProjekcije dodavanjeProjekcije = new DodavanjeProjekcije(modelProjekcija);								
+				DodavanjeProjekcije dodavanjeProjekcije = new DodavanjeProjekcije(modelProjekcija, frame);								
 				dodavanjeProjekcije.setVisible(true);
+				frame.setVisible(false);
 			}
 		});
 		btnDodajProjekciju.setBounds(24, 424, 146, 44);
@@ -151,8 +152,21 @@ public class GlavnaForma {
 		JButton btnSacuvajFestival = new JButton("Sacuvaj festival");
 		btnSacuvajFestival.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(Kontroler.Instanca().ispravnoUnetiSviTextBoxovi(txtNaziFestivala.getText(), txtDatumPocetka.getText(), txtDatumZavrsetka.getText()) && Kontroler.Instanca().proveriFormatDatuma(txtDatumPocetka.getText(), txtDatumZavrsetka.getText())) {
+				if(Kontroler.Instanca().ispravnoUnetiSviTextBoxovi(txtNaziFestivala.getText(), txtDatumPocetka.getText(), txtDatumZavrsetka.getText()) && 
+						Kontroler.Instanca().proveriFormatDatuma(txtDatumPocetka.getText(), txtDatumZavrsetka.getText())
+						&& modelProjekcija.getRowCount() > 0) 
+				{
 					Kontroler.Instanca().SacuvajFestival(txtNaziFestivala.getText(), txtDatumPocetka.getText(), txtDatumZavrsetka.getText(), (Grad) cbGrad.getSelectedItem());	
+					
+					modelProjekcija.setRowCount(0);
+					txtNaziFestivala.setText("");
+					txtDatumPocetka.setText("");
+					txtDatumZavrsetka.setText("");
+				}
+				else if(modelProjekcija.getRowCount() == 0) 
+				{
+					JFrame f=new JFrame();  
+					JOptionPane.showMessageDialog(f,"Mora biti uneta barem 1 projekcija!");  
 				}
 				else {
 					JFrame f=new JFrame();  
