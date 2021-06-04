@@ -12,6 +12,7 @@ import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 
 import rs.ac.bg.fon.ai.ZavrsniProjekat.Domen.Film;
+import rs.ac.bg.fon.ai.ZavrsniProjekat.Domen.Projekcija;
 import rs.ac.bg.fon.ai.ZavrsniProjekat.Kontroler.Kontroler;
 
 import javax.swing.JScrollPane;
@@ -21,6 +22,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.ListSelectionModel;
@@ -41,7 +44,7 @@ public class DodavanjeProjekcije extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					DodavanjeProjekcije frame = new DodavanjeProjekcije();
+					DodavanjeProjekcije frame = new DodavanjeProjekcije(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -52,8 +55,10 @@ public class DodavanjeProjekcije extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @param modelProjekcija 
+	 * @param tblProjekcija 
 	 */
-	public DodavanjeProjekcije() {
+	public DodavanjeProjekcije(final DefaultTableModel modelProjekcija) {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 676, 511);
@@ -111,7 +116,18 @@ public class DodavanjeProjekcije extends JFrame {
 					JOptionPane.showMessageDialog(f,"Nije unet datum ili je los format!");  
 				}
 				else {
-					System.out.println(modelFilm.getDataVector().elementAt(tblFilmovi.getSelectedRow()));
+					for (Film film : sviFilmovi) {
+						if(film.getFilmID() == (int)tblFilmovi.getModel().getValueAt(tblFilmovi.getSelectedRow(),3)) 
+						{
+							Object[] data = {film.getNaziv(), txtDatumVreme.getText()};
+							modelProjekcija.addRow(data);
+
+							Timestamp timestamp = Timestamp.valueOf(txtDatumVreme.getText());
+							Projekcija p = new Projekcija(0, 0, timestamp, film.getFilmID());
+							Kontroler.Instanca().dodajProjekciju(p); 
+							System.out.println(film);
+						}
+					}
 				}
 			}
 		});
@@ -135,6 +151,7 @@ public class DodavanjeProjekcije extends JFrame {
 		});
 		
 	}
+
 	public void SortirajTabelu(String deoFilma, DefaultTableModel modelFilm) {
 		modelFilm.setRowCount(0);
 		for (Film f : sviFilmovi) {

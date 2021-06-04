@@ -9,12 +9,14 @@ import rs.ac.bg.fon.ai.ZavrsniProjekat.Broker.BrokerBP;
 import rs.ac.bg.fon.ai.ZavrsniProjekat.Domen.Festival;
 import rs.ac.bg.fon.ai.ZavrsniProjekat.Domen.Film;
 import rs.ac.bg.fon.ai.ZavrsniProjekat.Domen.Grad;
+import rs.ac.bg.fon.ai.ZavrsniProjekat.Domen.Projekcija;
 
 public class Kontroler {
 	
 	private BrokerBP broker;
 	private static Kontroler kontroler = null;
-	
+	private ArrayList<Projekcija> projekcijeZaUnos = new ArrayList<Projekcija>();
+
 	private Kontroler() {
 		broker = new BrokerBP();
 	}
@@ -34,10 +36,14 @@ public class Kontroler {
 			Festival f = new Festival(0, nazivFestivala, new java.sql.Date(new SimpleDateFormat("yyyy-MM-dd").parse(datumPocetka).getTime()), new java.sql.Date(new SimpleDateFormat("yyyy-MM-dd").parse(datumZavrsetka).getTime()), grad.getGradID());
 			broker.dodajFestival(f);
 			
+			broker.dodajProjekcije(projekcijeZaUnos); 
+
+			projekcijeZaUnos.clear();
+			
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		//broker.dodajProjekcije(null); //treba uneti preko tabele listu projekcija.
+
 	}
 	
 	public void PretraziFestivale(String deoImena) 
@@ -113,5 +119,9 @@ public class Kontroler {
 			return false;
 		}
 		return true;
+	}
+
+	public void dodajProjekciju(Projekcija p) {
+		projekcijeZaUnos.add(p);
 	}
 }

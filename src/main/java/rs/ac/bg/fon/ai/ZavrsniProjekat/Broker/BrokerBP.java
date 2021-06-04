@@ -73,7 +73,7 @@ public class BrokerBP {
 		}
 	}
 	
-	public void dodajProjekcije(ArrayList<Projekcija> proojekcije) 
+	public void dodajProjekcije(ArrayList<Projekcija> projekcije) 
 	{
 		try 
 		{
@@ -81,7 +81,7 @@ public class BrokerBP {
 			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Festivali","root","");		
 			Statement statement = con.createStatement();		
 			
-			for (Projekcija projekcija : proojekcije) {
+			for (Projekcija projekcija : projekcije) {
 				statement.executeUpdate("INSERT INTO projekcija (projekcijaID, festivalID, datumVremeProjekcije, filmID) VALUES ("+
 			null+","+ projekcija.getFestivalID()+ ", "+ projekcija.getDatumVremeProjekcije()+ ", "+ projekcija.getFilmID() +")");
 			}

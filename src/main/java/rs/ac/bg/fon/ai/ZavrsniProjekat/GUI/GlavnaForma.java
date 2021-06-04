@@ -141,7 +141,7 @@ public class GlavnaForma {
 		JButton btnDodajProjekciju = new JButton("Dodaj projekciju");
 		btnDodajProjekciju.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {				
-				DodavanjeProjekcije dodavanjeProjekcije = new DodavanjeProjekcije();								
+				DodavanjeProjekcije dodavanjeProjekcije = new DodavanjeProjekcije(modelProjekcija);								
 				dodavanjeProjekcije.setVisible(true);
 			}
 		});
