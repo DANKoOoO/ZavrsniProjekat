@@ -53,7 +53,7 @@ public class Festival {
 		if(datumDo == null) {
 			throw new NullPointerException("Datum zavrsetka ne sme biti null");
 		}
-		if(datumOd.before(this.getDatumOd())) {
+		if(datumDo.before(this.getDatumOd())) {
 			throw new RuntimeException("Datum zavrsetka mora biti posle datuma pocetka");
 		}
 		this.datumDo = datumDo;
@@ -102,27 +102,29 @@ public class Festival {
 			if(fe.datumOd != null) {
 				return false;
 			}
-			else if(!datumOd.equals(fe.datumOd)) {
-				return false;
-			}
+
+		}
+		else if(!datumOd.equals(fe.datumOd)) {
+			return false;
 		}
 		
 		if(datumDo == null) {
 			if(fe.datumDo != null) {
 				return false;
 			}
-			else if(!datumOd.equals(fe.datumDo)) {
-				return false;
-			}
+
+		}
+		else if(!datumDo.equals(fe.datumDo)) {
+			return false;
 		}
 		
 		if(naziv == null) {
 			if(fe.naziv != null) {
 				return false;
-			}
-			else if(!datumOd.equals(fe.naziv)) {
-				return false;
-			}
+			}		
+		}
+		else if(!naziv.equals(fe.naziv)) {
+			return false;
 		}
 		
 		if(festivalID != fe.festivalID) {

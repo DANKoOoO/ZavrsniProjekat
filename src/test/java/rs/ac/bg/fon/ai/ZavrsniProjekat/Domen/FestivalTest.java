@@ -113,12 +113,10 @@ class FestivalTest {
 	@DisplayName("Testira se ako unet datum zavrsetka pre pocetnog datuma")
 	void testSetDatumDoPrePocetka() {
 		LocalDate sutra = LocalDate.now().plusDays(1);
-		LocalDate danPosle = sutra.minusDays(2);
+		LocalDate danPre = sutra.minusDays(1);
 		Date dt = Date.valueOf(sutra);
-		Date dt1 = Date.valueOf(danPosle);
+		Date dt1 = Date.valueOf(danPre);
 		f.setDatumOd(dt);
-		f.setDatumDo(dt1);
-
 
 		assertThrows(java.lang.RuntimeException.class,
 				()->f.setDatumDo(dt1));
@@ -172,7 +170,8 @@ class FestivalTest {
 		
 		assertNotNull(f);
 		assertEquals("Festival", f.getNaziv());
-		assertEquals(1, f.getGradID());
+		assertEquals(1, f.getFestivalID());
+		assertEquals(2, f.getGradID());
 		assertEquals(dt, f.getDatumOd());
 		assertEquals(dt1, f.getDatumDo());
 	}
@@ -185,12 +184,12 @@ class FestivalTest {
 
 	@ParameterizedTest
 	@CsvSource ({
-		"1, Festival, 2020-02-02, 2020-03-03 2, 1, Festival, 2020-02-02, 2020-03-03 2, true",
-		"9, Festival, 2020-02-02, 2020-03-03 2, 1, Festival, 2020-02-02, 2020-03-03 2, false",
-		"1, fest, 2020-02-02, 2020-03-03 2, 1, Festival, 2020-02-02, 2020-03-03 2, false",
-		"1, Festival, 2020-01-02, 2020-03-03 2, 1, Festival, 2020-02-02, 2020-03-03 2, false",
-		"1, Festival, 2020-02-02, 2020-01-03 2, 1, Festival, 2020-02-02, 2020-03-03 2, false",
-		"1, Festival, 2020-02-02, 2020-03-03 9, 1, Festival, 2020-02-02, 2020-03-03 2, false"
+		"1, Festival, 9999-12-25, 9999-12-26, 2, 1, Festival, 9999-12-25, 9999-12-26, 2, true",
+		"9, Festival, 9999-12-25, 9999-12-26, 2, 1, Festival, 9999-12-25, 9999-12-26, 2, false",
+		"1, fest, 9999-12-25, 9999-12-26, 2, 1, Festival, 9999-12-25, 9999-12-26, 2, false",
+		"1, Festival, 9999-12-24, 9999-12-26, 2, 1, Festival, 9999-12-25, 9999-12-26, 2, false",
+		"1, Festival, 9999-12-25, 9999-12-27, 2, 1, Festival, 9999-12-25, 9999-12-26, 2, false",
+		"1, Festival, 9999-12-25, 9999-12-26, 9, 1, Festival, 9999-12-25, 9999-12-26, 2, false"
 	})
 	@DisplayName("Testiranje equals metode")
 	void testEqualsObject(int festivalID1, String naziv1, String datumOd1, String datumDo1, int gardID1,
