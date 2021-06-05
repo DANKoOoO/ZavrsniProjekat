@@ -215,7 +215,7 @@ public class BrokerBP {
 			
 			while(rs.next()) 
 			{
-				sviGlumci.add(new Glumac(rs.getInt(1), rs.getString(2)));								
+				sviGlumci.add(new Glumac(rs.getInt(1), rs.getString(2), rs.getInt(3)));								
 			}						
 			return sviGlumci;
 		}

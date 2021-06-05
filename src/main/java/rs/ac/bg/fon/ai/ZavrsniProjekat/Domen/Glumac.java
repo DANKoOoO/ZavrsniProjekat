@@ -5,6 +5,7 @@ import javax.management.RuntimeErrorException;
 public class Glumac {
 	private int glumacID;
 	private String imePrezime;
+	private int filmID;
 	
 	public int getGlumacID() {
 		return glumacID;
@@ -36,12 +37,23 @@ public class Glumac {
 		}
 		this.imePrezime = imePrezime;
 	}
-
-	public Glumac(int glumacID, String imePrezime) {
+	
+	public int getFilmID() {
+		return filmID;
+	}
+	
+	public void setFilmID(int filmID) {
+		if(filmID < 0) {
+			throw new RuntimeException("ID mora biti pozitivan ceo broj");
+		}
+		this.filmID = filmID;
+	}
+	
+	public Glumac(int glumacID, String imePrezime, int filmID) {
 		super();
 		this.glumacID = glumacID;
 		setImePrezime(imePrezime);
-
+		this.filmID = filmID;
 	}
 	
 	@Override
@@ -76,6 +88,9 @@ public class Glumac {
 		if(glumacID != gl.glumacID) {
 			return false;
 		}
+		if(filmID != gl.filmID) {
+			return false;
+		}	
 		return true;
 	}
 	
