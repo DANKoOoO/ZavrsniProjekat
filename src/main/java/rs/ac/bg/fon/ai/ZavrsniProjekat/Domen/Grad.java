@@ -30,10 +30,10 @@ public class Grad {
 		return drzava;
 	}
 	public void setDrzava(String drzava) {
-		if(naziv == null) {
+		if(drzava == null) {
 			throw new NullPointerException("Drzava ne sme biti null");
 		}
-		if((naziv.length() == 0)){
+		if((drzava.length() == 0)){
 			throw new RuntimeException("Drzava mora da ima barem 1 slovo");
 		}
 		this.drzava = drzava;
