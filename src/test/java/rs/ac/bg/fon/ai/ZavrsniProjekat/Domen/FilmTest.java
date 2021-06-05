@@ -101,7 +101,7 @@ class FilmTest {
 
 	
 	@Test
-	@DisplayName("Testiranje toString metodu")
+	@DisplayName("Testiranje toString metode")
 	void testToString() {
 		f.setNaziv("Bad Boys");
 		f.setReziser("Vin Disel");
