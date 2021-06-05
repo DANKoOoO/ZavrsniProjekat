@@ -30,10 +30,10 @@ public class Grad {
 		return drzava;
 	}
 	public void setDrzava(String drzava) {
-		if(naziv == null) {
+		if(drzava == null) {
 			throw new NullPointerException("Drzava ne sme biti null");
 		}
-		if((naziv.length() == 0)){
+		if((drzava.length() == 0)){
 			throw new RuntimeException("Drzava mora da ima barem 1 slovo");
 		}
 		this.drzava = drzava;
@@ -45,9 +45,9 @@ public class Grad {
 	
 	public Grad(int gradID, String naziv, String drzava) {
 		super();
-		this.gradID = gradID;
-		this.naziv = naziv;
-		this.drzava = drzava;
+		setGradID(gradID);
+		setNaziv(naziv);
+		setDrzava(drzava);
 	}
 	public Grad() {
 		super();
@@ -68,17 +68,17 @@ public class Grad {
 			if(gr.naziv != null) {
 				return false;
 			}
-			else if(!naziv.equals(gr.naziv)) {
-				return false;
-			}
+		}
+		else if(!naziv.equals(gr.naziv)) {
+			return false;
 		}
 		if(drzava == null) {
 			if(gr.drzava != null) {
 				return false;
-			}
-			else if(!drzava.equals(gr.drzava)) {
-				return false;
-			}
+			}	
+		}
+		else if(!drzava.equals(gr.drzava)) {
+			return false;
 		}
 		if(gradID != gr.gradID) {
 			return false;

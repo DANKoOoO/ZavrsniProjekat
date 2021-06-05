@@ -13,7 +13,7 @@ public class RefreshThread extends Thread{
 	private DefaultTableModel modelFestival;
 	public static String deoNaziva = "";
 	private ArrayList<Festival> festivali; 
-	private boolean ceka = false;
+
 	@Override
 	public void run() {		
 		refreshuj();
@@ -30,26 +30,25 @@ public class RefreshThread extends Thread{
 	
 		try 
 		{
+			modelFestival.setRowCount(0);
+			festivali = null;
+			festivali = broker.vratiOdredjeneFestivale(deoNaziva);
+
+			for (Festival f : festivali) {
+				Object[] data = {f.getNaziv(), f.getGradID(), f.getDatumOd(), f.getDatumDo()};
+				modelFestival.addRow(data);					
+			}
 			wait(3000);
 		}
 		catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		
-		modelFestival.setRowCount(0);
-		festivali = null;
-		festivali = broker.vratiOdredjeneFestivale(deoNaziva);
 
-		for (Festival f : festivali) {
-			Object[] data = {f.getNaziv(), f.getGradID(), f.getDatumOd(), f.getDatumDo()};
-			modelFestival.addRow(data);					
-		}
-		ceka = true;
 		refreshuj();
 	}
 
 	public synchronized void obavesti() {
-		ceka = false;
+
 		notifyAll();
 	}
 }
