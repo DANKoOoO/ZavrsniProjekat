@@ -80,11 +80,12 @@ public class Glumac {
 		if(imePrezime == null) {
 			if(gl.imePrezime != null) {
 				return false;
-			}
-			else if(!imePrezime.equals(gl.imePrezime)) {
-				return false;
-			}
+			}		
 		}
+		else if(!imePrezime.equals(gl.imePrezime)) {
+			return false;
+		}
+		
 		if(glumacID != gl.glumacID) {
 			return false;
 		}

@@ -89,18 +89,19 @@ public class Film {
 			if(fl.naziv != null) {
 				return false;
 			}
-			else if(!naziv.equals(fl.naziv)) {
-				return false;
-			}
+		}
+		else if(!naziv.equals(fl.naziv)) {
+			return false;
 		}
 		if(reziser == null) {
 			if(fl.reziser != null) {
 				return false;
-			}
-			else if(!reziser.equals(fl.reziser)) {
-				return false;
-			}
+			}	
 		}
+		else if(!reziser.equals(fl.reziser)) {
+			return false;
+		}
+		
 		if(filmID != fl.filmID) {
 			return false;
 		}

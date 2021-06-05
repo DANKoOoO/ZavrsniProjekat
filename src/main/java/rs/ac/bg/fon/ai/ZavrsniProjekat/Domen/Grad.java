@@ -68,17 +68,17 @@ public class Grad {
 			if(gr.naziv != null) {
 				return false;
 			}
-			else if(!naziv.equals(gr.naziv)) {
-				return false;
-			}
+		}
+		else if(!naziv.equals(gr.naziv)) {
+			return false;
 		}
 		if(drzava == null) {
 			if(gr.drzava != null) {
 				return false;
-			}
-			else if(!drzava.equals(gr.drzava)) {
-				return false;
-			}
+			}	
+		}
+		else if(!drzava.equals(gr.drzava)) {
+			return false;
 		}
 		if(gradID != gr.gradID) {
 			return false;

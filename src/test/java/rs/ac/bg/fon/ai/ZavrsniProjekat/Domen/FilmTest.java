@@ -132,10 +132,11 @@ class FilmTest {
 	
 	@ParameterizedTest
 	@CsvSource ({
-		"1, Bad Boys, Vin Disel 2000, 1, Bad Boys, Vin Disel 2000, true",
-		"2, Bad Boys, Vin Disel 2000, 1, Bad Boys, Vin Disel 2000, false",
-		"1, Fast and Furious, Vin Disel 2000, 1, Bad Boys, Vin Disel 2000, false",
-		"1, Bad Boys, Vin Disel 2001, 1, Bad Boys, Vin Disel 2000, false"
+		"1, Bad Boys, Vin Disel, 2000, 1, Bad Boys, Vin Disel, 2000, true",
+		"2, Bad Boys, Vin Disel, 2000, 1, Bad Boys, Vin Disel, 2000, false",
+		"1, Fast and Furious, Vin Disel, 2000, 1, Bad Boys, Vin Disel, 2000, false",
+		"1, Bad Boys, Will Smith, 2000, 1, Bad Boys, Vin Disel, 2000, false",
+		"1, Bad Boys, Vin Disel, 2001, 1, Bad Boys, Vin Disel, 2000, false"
 	})
 	@DisplayName("Testiranje equals metode")
 	void testEqualsObject(int filmID1, String naziv1, String reziser1, int godina1,

@@ -3,6 +3,7 @@ package rs.ac.bg.fon.ai.ZavrsniProjekat.Domen;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.sql.Timestamp;
+import java.util.Calendar;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -55,7 +56,14 @@ class ProjekcijaTest {
 	@Test
 	@DisplayName("Testira ispravno unet datum i vreme projekcije")
 	void testSetDatumVremeProjekcije() {
-		fail("Not yet implemented");
+		Timestamp ts = new Timestamp(System.currentTimeMillis());
+		Calendar c = Calendar.getInstance(); 
+		c.setTime(ts); 
+		c.add(Calendar.DATE, 1);
+		ts = (Timestamp) c.getTime();
+		
+		p.setDatumVremeProjekcije(ts);
+		assertEquals(ts, p.getDatumVremeProjekcije());
 	}
 	
 	@Test

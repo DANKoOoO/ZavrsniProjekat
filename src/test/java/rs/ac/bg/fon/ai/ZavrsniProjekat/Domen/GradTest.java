@@ -109,8 +109,8 @@ class GradTest {
 	@CsvSource ({
 		"1, Beograd , Srbija, 1, Beograd, Srbija, true",
 		"2, Beograd , Srbija, 1, Beograd, Srbija, false",
-		"1, Smederevo , Srbija, 1, Beograd, Srbija, false",
-		"1, Beograd , Italija, 1, Beograd, Srbija, false"
+		"1, Smederevo, Srbija, 1, Beograd, Srbija, false",
+		"1, Beograd, Italija, 1, Beograd, Srbija, false"
 	})
 	@DisplayName("Testiranje equals metode")
 	void testEqualsObject(int gradID1, String naziv1, String drzava1,

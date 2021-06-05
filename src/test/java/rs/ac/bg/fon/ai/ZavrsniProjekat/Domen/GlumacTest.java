@@ -113,12 +113,12 @@ class GlumacTest {
 	void testEqualsObject(int glumacID1, String imePrezime1, int filmID1, 
 			int glumacID2, String imePrezime2, int filmID2,
 			boolean eq) {
-		g.setFilmID(glumacID1);
+		g.setGlumacID(glumacID1);
 		g.setImePrezime(imePrezime1);
 		g.setFilmID(filmID1);
 		
 		Glumac g2 = new Glumac();
-		g2.setFilmID(glumacID2);
+		g2.setGlumacID(glumacID2);
 		g2.setImePrezime(imePrezime2);
 		g2.setFilmID(filmID2);
 		
