@@ -1,10 +1,12 @@
 package rs.ac.bg.fon.ai.ZavrsniProjekat.Broker;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import rs.ac.bg.fon.ai.ZavrsniProjekat.Domen.Festival;
@@ -134,7 +136,13 @@ public class BrokerBP {
 			
 			while(rs.next()) 
 			{
-				sviFestivali.add(new Festival(rs.getInt(1), rs.getString(2), rs.getDate(3), rs.getDate(4), rs.getInt(5)));								
+				if(rs.getDate(3).before(new Date(System.currentTimeMillis()))) {
+					PreparedStatement st = con.prepareStatement("DELETE FROM festival WHERE FestivalID = "+rs.getInt(1));
+					st.executeUpdate();
+					
+				} else {
+					sviFestivali.add(new Festival(rs.getInt(1), rs.getString(2), rs.getDate(3), rs.getDate(4), rs.getInt(5)));		
+				}
 			}						
 			return sviFestivali;
 		}
@@ -156,7 +164,12 @@ public class BrokerBP {
 			
 			while(rs.next()) 
 			{
-				odredjeniFestivali.add(new Festival(rs.getInt(1), rs.getString(2), rs.getDate(3), rs.getDate(4), rs.getInt(5)));								
+				if(rs.getDate(3).before(new Date(System.currentTimeMillis()))) {
+					PreparedStatement st = con.prepareStatement("DELETE FROM festival WHERE FestivalID = "+rs.getInt(1));
+					st.executeUpdate();
+				} else {
+					odredjeniFestivali.add(new Festival(rs.getInt(1), rs.getString(2), rs.getDate(3), rs.getDate(4), rs.getInt(5)));		
+				}
 			}		
 			con.close();
 			return odredjeniFestivali;
@@ -177,8 +190,13 @@ public class BrokerBP {
 			
 			while(rs.next()) 
 			{
-				sveProjekcije.add(new Projekcija(rs.getInt(1), rs.getInt(2), rs.getTimestamp(3), rs.getInt(4)));								
-			}						
+				if(rs.getTimestamp(3).before(new Timestamp(System.currentTimeMillis()))) {
+					PreparedStatement st = con.prepareStatement("DELETE FROM projekcija WHERE ProjekcijaID = "+rs.getInt(1));
+					st.executeUpdate();
+				} else {
+					sveProjekcije.add(new Projekcija(rs.getInt(1), rs.getInt(2), rs.getTimestamp(3), rs.getInt(4)));								
+				}			
+			}
 			return sveProjekcije;
 		}
 		catch(Exception e) 
