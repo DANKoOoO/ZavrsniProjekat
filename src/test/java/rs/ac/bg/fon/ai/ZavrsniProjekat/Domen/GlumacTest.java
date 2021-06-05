@@ -64,28 +64,14 @@ class GlumacTest {
 				()-> g.setImePrezime("Brad1 Pitt2") );
 	}
 	
-	@Test
-	@DisplayName("Testira ispravno unet id filma")
-	void testSetFilmID() {
-		g.setFilmID(1);
-		assertEquals(1, g.getFilmID());
-	}
 
-	@Test
-	@DisplayName("Testira neispravno unet id filma (<0)")
-	void testSetFilmIDManiOdNule() {
-		assertThrows(java.lang.RuntimeException.class, 
-				()-> g.setFilmID(-1) );
-	}
-	
 	@Test
 	@DisplayName("Testiranje parametrizovanog konstruktora")
 	void testGlumacIntStringInt() {
-		g = new Glumac(1,"Brad Pit",1);
+		g = new Glumac(1,"Brad Pit");
 		assertNotNull(g);
 		assertEquals(1, g.getGlumacID());
 		assertEquals("Brad Pit", g.getImePrezime());
-		assertEquals(1, g.getFilmID());
 	}
 
 	@Test
@@ -104,23 +90,22 @@ class GlumacTest {
 
 	@ParameterizedTest
 	@CsvSource ({
-		"1, Brad Pit , 1, 1, Brad Pit, 1, true",
-		"2, Brad Pit , 1, 1, Brad Pit, 1, false",
-		"1, Brad Pit , 2, 1, Brad Pit, 1, false",
-		"1, Will Smith , 1, 1, Brad Pit, 1, false"
+		"1, Brad Pit , 1, Brad Pit, true",
+		"2, Brad Pit , 1, Brad Pit, false",
+		"1, Brad Pit , 2, Brad Pit, false",
+		"1, Will Smith, 1, Brad Pit, false"
 	})
 	@DisplayName("Testiranje equals metode")
-	void testEqualsObject(int glumacID1, String imePrezime1, int filmID1, 
-			int glumacID2, String imePrezime2, int filmID2,
+	void testEqualsObject(int glumacID1, String imePrezime1, 
+			int glumacID2, String imePrezime2,
 			boolean eq) {
-		g.setFilmID(glumacID1);
+		g.setGlumacID(glumacID1);
 		g.setImePrezime(imePrezime1);
-		g.setFilmID(filmID1);
+
 		
 		Glumac g2 = new Glumac();
-		g2.setFilmID(glumacID2);
+		g2.setGlumacID(glumacID2);
 		g2.setImePrezime(imePrezime2);
-		g2.setFilmID(filmID2);
 		
 		assertEquals(eq, g.equals(g2));
 	}
