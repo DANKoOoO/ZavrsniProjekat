@@ -32,19 +32,22 @@ public class Kontroler {
 		return kontroler;
 	}
 	
-	public void SacuvajFestival(String nazivFestivala, String datumPocetka, String datumZavrsetka, Grad grad) 
+	public boolean SacuvajFestival(String nazivFestivala, String datumPocetka, String datumZavrsetka, Grad grad) 
 	{
 		try {
-			java.sql.Date datumTEST = new java.sql.Date(new SimpleDateFormat("yyyy-MM-dd").parse(datumZavrsetka).getTime());
-			Festival f = new Festival(0, nazivFestivala, new java.sql.Date(new SimpleDateFormat("yyyy-MM-dd").parse(datumPocetka).getTime()), new java.sql.Date(new SimpleDateFormat("yyyy-MM-dd").parse(datumZavrsetka).getTime()), grad.getGradID());
+			//java.sql.Date datumTEST = new java.sql.Date(new SimpleDateFormat("yyyy-MM-dd").parse(datumZavrsetka).getTime());
+			Festival f = new Festival(0, nazivFestivala, 
+					new java.sql.Date(new SimpleDateFormat("yyyy-MM-dd").parse(datumPocetka).getTime()), 
+					new java.sql.Date(new SimpleDateFormat("yyyy-MM-dd").parse(datumZavrsetka).getTime()), grad.getGradID());
 			int festivalID = broker.dodajFestival(f);
 			
 			broker.dodajProjekcije(projekcijeZaUnos, festivalID); 
 
 			projekcijeZaUnos.clear();
+			return true;
 			
 		} catch (ParseException e) {
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 
 	}
@@ -62,7 +65,7 @@ public class Kontroler {
 	public boolean ispravnoUnetiSviTextBoxovi(String...strings) 
 	{
 		for (String s : strings) {
-			if(s.isEmpty()) 
+			if(s==null || s.isEmpty()) 
 			{
 				return false;
 			}
