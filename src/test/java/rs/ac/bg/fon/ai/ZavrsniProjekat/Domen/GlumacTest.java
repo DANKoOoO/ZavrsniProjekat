@@ -10,7 +10,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 class GlumacTest {
-	Glumac g;
+	private Glumac g;
 	@BeforeEach
 	void setUp() throws Exception {
 		g = new Glumac();

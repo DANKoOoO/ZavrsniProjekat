@@ -11,7 +11,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 
 class GradTest {
-	Grad g;
+	private Grad g;
 	@BeforeEach
 	void setUp() throws Exception {
 		g = new Grad();
@@ -83,6 +83,7 @@ class GradTest {
 	void testToString() {
 		g.setNaziv("Beograd");
 		g.setDrzava("Srbija");
+		
 		String s = g.toString();
 		assertTrue(s.contains("Beograd"));
 		assertTrue(s.contains("Srbija"));

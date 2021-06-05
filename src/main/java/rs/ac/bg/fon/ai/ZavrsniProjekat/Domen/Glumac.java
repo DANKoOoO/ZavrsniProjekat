@@ -51,9 +51,9 @@ public class Glumac {
 	
 	public Glumac(int glumacID, String imePrezime, int filmID) {
 		super();
-		this.glumacID = glumacID;
+		setGlumacID(glumacID);
 		setImePrezime(imePrezime);
-		this.filmID = filmID;
+		setFilmID(filmID);;
 	}
 	
 	@Override

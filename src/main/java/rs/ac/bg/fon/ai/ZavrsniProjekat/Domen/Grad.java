@@ -45,9 +45,9 @@ public class Grad {
 	
 	public Grad(int gradID, String naziv, String drzava) {
 		super();
-		this.gradID = gradID;
-		this.naziv = naziv;
-		this.drzava = drzava;
+		setGradID(gradID);
+		setNaziv(naziv);
+		setDrzava(drzava);
 	}
 	public Grad() {
 		super();
