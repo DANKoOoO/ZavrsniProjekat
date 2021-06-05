@@ -109,7 +109,7 @@ class GlumacTest {
 		"1, Brad Pit , 2, 1, Brad Pit, 1, false",
 		"1, Will Smith , 1, 1, Brad Pit, 1, false"
 	})
-	@DisplayName("Testiranje parametrizovanog konstruktora")
+	@DisplayName("Testiranje equals metode")
 	void testEqualsObject(int glumacID1, String imePrezime1, int filmID1, 
 			int glumacID2, String imePrezime2, int filmID2,
 			boolean eq) {
