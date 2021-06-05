@@ -59,8 +59,8 @@ class ProjekcijaTest {
 		Timestamp ts = new Timestamp(System.currentTimeMillis());
 		Calendar c = Calendar.getInstance(); 
 		c.setTime(ts); 
-		c.add(Calendar.DATE, 1);
-		ts = (Timestamp) c.getTime();
+		c.add(Calendar.DAY_OF_WEEK, 1);
+		ts.setTime(c.getTime().getTime());
 		
 		p.setDatumVremeProjekcije(ts);
 		assertEquals(ts, p.getDatumVremeProjekcije());
@@ -113,11 +113,11 @@ class ProjekcijaTest {
 
 	@ParameterizedTest
 	@CsvSource ({
-		"1, 2, 2020-12-12 01:00:00, 3, 1, 2, 2020-12-12 01:00:00, 3, true",
-		"9, 2, 2020-12-12 01:00:00, 3, 1, 2, 2020-12-12 01:00:00, 3, false",
-		"1, 9, 2020-12-12 01:00:00, 3, 1, 2, 2020-12-12 01:00:00, 3, false",
-		"1, 2, 2020-12-12 21:00:00, 3, 1, 2, 2020-12-12 01:00:00, 3, false",
-		"1, 2, 2020-12-12 01:00:00, 9, 1, 2, 2020-12-12 01:00:00, 3, false"
+		"1, 2, 9999-12-25 23:59:59, 3, 1, 2, 9999-12-25 23:59:59, 3, true",
+		"9, 2, 9999-12-25 23:59:59, 3, 1, 2, 9999-12-25 23:59:59, 3, false",
+		"1, 9, 9999-12-25 23:59:59, 3, 1, 2, 9999-12-25 23:59:59, 3, false",
+		"1, 2, 9999-12-24 23:59:59, 3, 1, 2, 9999-12-25 23:59:59, 3, false",
+		"1, 2, 9999-12-25 23:59:59, 9, 1, 2, 9999-12-25 23:59:59, 3, false"
 	})
 	@DisplayName("Testiranje equals metode")
 	void testEqualsObject(int projekcijaID1, int festivalID1, String datumVreme1, int filmID1,

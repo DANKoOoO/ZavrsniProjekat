@@ -73,9 +73,9 @@ public class Projekcija {
 			if(pr.datumVremeProjekcije != null) {
 				return false;
 			}
-			else if(!datumVremeProjekcije.equals(pr.datumVremeProjekcije)) {
-				return false;
-			}
+		}
+		else if(!datumVremeProjekcije.equals(pr.datumVremeProjekcije)) {
+			return false;
 		}
 		if(filmID != pr.filmID) {
 			return false;
