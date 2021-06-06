@@ -13,7 +13,26 @@ public class RefreshThread extends Thread{
 	private DefaultTableModel modelFestival;
 	public static String deoNaziva = "";
 	private ArrayList<Festival> festivali; 
-
+	
+	private static RefreshThread refreshThread = null;
+	
+	private RefreshThread() {
+		
+	}
+	
+	public static RefreshThread Instanca(BrokerBP broker, DefaultTableModel modelFestival) {
+		if(refreshThread == null)
+			refreshThread = new RefreshThread(broker, modelFestival);
+		return refreshThread;
+	}
+	
+	
+	public static RefreshThread Instanca() {
+		if(refreshThread == null)
+			refreshThread = new RefreshThread();
+		return refreshThread;
+	}
+	
 	@Override
 	public void run() {		
 		refreshuj();
