@@ -107,7 +107,7 @@ public class Kontroler {
 	 * @return Lista filmova kao ArrayList<rs.ac.bf.fon.ai.ZavrsniProjekat.Domen.Film>
 	 */
 	public ArrayList<Film> VratiSveFilmove() {
-		return broker.getSviFilmovi();
+		return broker.vratiSveFilmove();
 	}
 	/**
 	 * Vraca boolean vrednost koja zavisi od toga da li su prosledjene vrednosti
@@ -137,7 +137,7 @@ public class Kontroler {
 	 * @return Lista gradova kao ArrayList<rs.ac.bf.fon.ai.ZavrsniProjekat.Domen.Grad>
 	 */
 	public ArrayList<Grad> VratiSveGradove() {
-		return broker.getSviGradovi();
+		return broker.vratiSveGradove();
 	}
 
 	/**
