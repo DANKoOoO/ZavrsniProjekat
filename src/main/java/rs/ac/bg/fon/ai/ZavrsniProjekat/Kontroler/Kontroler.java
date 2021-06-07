@@ -1,11 +1,16 @@
 package rs.ac.bg.fon.ai.ZavrsniProjekat.Kontroler;
 
+import java.io.FileWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Vector;
 
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import rs.ac.bg.fon.ai.ZavrsniProjekat.Broker.BrokerBP;
 import rs.ac.bg.fon.ai.ZavrsniProjekat.Domen.Festival;
@@ -98,7 +103,6 @@ public class Kontroler {
 	 */
 	public void pretraziFestivale(String deoImena) 
 	{
-		
 		return;
 	}
 	/**
@@ -258,5 +262,18 @@ public class Kontroler {
 	public void promeniDeoNaziva(String deoNaziva) {		
 		RefreshThread.Instanca().deoNaziva = deoNaziva;
 		RefreshThread.Instanca().obavesti();
+	}
+	public void SacuvajKaoJSON(String deoNaziva) {
+		ArrayList<Festival> festivaliZaJSON = broker.vratiOdredjeneFestivale(deoNaziva);
+		
+		try(FileWriter fajl = new FileWriter("festivali.json")){
+			Gson gson = new GsonBuilder().setPrettyPrinting().create();
+			gson.toJson(festivaliZaJSON,fajl);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+
+		
 	}
 }

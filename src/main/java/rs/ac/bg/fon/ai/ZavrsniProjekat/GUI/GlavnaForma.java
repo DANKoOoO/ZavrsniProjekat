@@ -141,7 +141,7 @@ public class GlavnaForma {
 		frame.getContentPane().add(scrollPaneProjekcija);
 		
 		JScrollPane scrollPaneFestival = new JScrollPane(tblFestival);
-		scrollPaneFestival.setBounds(504, 99, 387, 369);
+		scrollPaneFestival.setBounds(504, 99, 387, 314);
 		frame.getContentPane().add(scrollPaneFestival);
 		
 		
@@ -197,6 +197,15 @@ public class GlavnaForma {
 		JLabel lblNewLabel_6 = new JLabel("Pretraga festivala");
 		lblNewLabel_6.setBounds(504, 14, 187, 14);
 		frame.getContentPane().add(lblNewLabel_6);
+		
+		JButton btnSacuvajKaoJSON = new JButton("Sacuvaj kao JSON");
+		btnSacuvajKaoJSON.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {				
+				Kontroler.Instanca().SacuvajKaoJSON(txtPretraga.getText());
+			}
+		});
+		btnSacuvajKaoJSON.setBounds(589, 424, 255, 44);
+		frame.getContentPane().add(btnSacuvajKaoJSON);
 		
 		txtPretraga.getDocument().addDocumentListener(new DocumentListener() {
 			public void removeUpdate(DocumentEvent e) {
