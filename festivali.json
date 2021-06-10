@@ -1,86 +1,9 @@
 [
   {
-    "festivalID": 3,
-    "naziv": "s",
-    "datumOd": "Oct 22, 2201",
-    "datumDo": "Oct 22, 2201",
-    "gradID": 1
-  },
-  {
-    "festivalID": 4,
-    "naziv": "s",
-    "datumOd": "Oct 22, 2201",
-    "datumDo": "Oct 22, 2201",
-    "gradID": 1
-  },
-  {
-    "festivalID": 5,
-    "naziv": "s1",
-    "datumOd": "Dec 1, 2021",
-    "datumDo": "Dec 12, 2021",
-    "gradID": 1
-  },
-  {
     "festivalID": 15,
     "naziv": "BBBBBBBBBBBBBBBBBBB",
     "datumOd": "Dec 12, 2021",
     "datumDo": "Dec 12, 2021",
-    "gradID": 1
-  },
-  {
-    "festivalID": 16,
-    "naziv": "CCCCCCCCCCCC",
-    "datumOd": "Dec 12, 2021",
-    "datumDo": "Dec 12, 2021",
-    "gradID": 1
-  },
-  {
-    "festivalID": 17,
-    "naziv": "festival",
-    "datumOd": "Dec 25, 9999",
-    "datumDo": "Dec 26, 9999",
-    "gradID": 1
-  },
-  {
-    "festivalID": 18,
-    "naziv": "festival",
-    "datumOd": "Dec 25, 9999",
-    "datumDo": "Dec 26, 9999",
-    "gradID": 1
-  },
-  {
-    "festivalID": 19,
-    "naziv": "festival",
-    "datumOd": "Dec 25, 9999",
-    "datumDo": "Dec 26, 9999",
-    "gradID": 1
-  },
-  {
-    "festivalID": 20,
-    "naziv": "festival",
-    "datumOd": "Dec 25, 9999",
-    "datumDo": "Dec 26, 9999",
-    "gradID": 1
-  },
-  {
-    "festivalID": 21,
-    "naziv": "festival",
-    "datumOd": "Dec 25, 9999",
-    "datumDo": "Dec 26, 9999",
-    "gradID": 1
-  },
-  {
-    "festivalID": 22,
-    "naziv": "sedam",
-    "datumOd": "Oct 10, 2021",
-    "datumDo": "Oct 20, 2021",
-    "gradID": 2
-  },
-  {
-    "festivalID": 23,
-    "naziv": "festival",
-    "datumOd": "Dec 25, 9999",
-    "datumDo": "Dec 26, 9999",
     "gradID": 1
   }
 ]
