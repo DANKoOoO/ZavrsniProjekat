@@ -28,7 +28,7 @@ class KontrolerTest {
 		String datumOd = "9999-12-25";
 		String datumDo = "9999-12-26";
 		Grad grad = new Grad(1, "Beograd", "Srbija");
-	
+
 		assertTrue(Kontroler.Instanca().SacuvajFestival(naziv, datumOd, datumDo, grad));
 	}
 	
@@ -44,7 +44,9 @@ class KontrolerTest {
 
 	@Test
 	void testVratiSveFilmove() {
-		assertTrue(Kontroler.Instanca().VratiSveFilmove() == null || Kontroler.Instanca().VratiSveFilmove().size() > 0);
+		assertNotNull(Kontroler.Instanca().VratiSveFilmove());
+		
+		assertTrue(Kontroler.Instanca().VratiSveFilmove().size() >= 0);
 	}
 
 	@Test
@@ -70,7 +72,9 @@ class KontrolerTest {
 
 	@Test
 	void testVratiSveGradove() {
-		assertTrue(Kontroler.Instanca().VratiSveGradove() == null || Kontroler.Instanca().VratiSveGradove().size() > 0);
+		assertNotNull(Kontroler.Instanca().VratiSveGradove());
+		
+		assertTrue(Kontroler.Instanca().VratiSveGradove().size() > 0);
 	}
 
 	@Test

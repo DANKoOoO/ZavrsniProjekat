@@ -100,7 +100,8 @@ public class BrokerBP {
 			con.close();			
 		} catch(Exception e) 
 		{
-			System.out.println("Greska prilikom konekcije sa bazom! [Unosenje projekcija]\n"+ e);
+			throw new RuntimeException("Greska prilikom konekcije sa bazom! [Unosenje projekcija]\n"+ e);
+
 
 		}
 	}

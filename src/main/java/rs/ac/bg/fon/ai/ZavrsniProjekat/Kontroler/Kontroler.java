@@ -94,7 +94,9 @@ public class Kontroler {
 		} catch (ParseException e) {
 			throw new RuntimeException(e);
 		}
-
+		catch (Exception e) {
+			return false;
+		}
 	}
 	/**
 	 * Nije implementirana.
